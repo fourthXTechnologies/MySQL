@@ -86,6 +86,27 @@ CREATE DATABASE company_db;
 CREATE DATABASE company_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
 
+### Check database character set / collation (and related info)
+```sql
+SHOW CREATE DATABASE your_database_name;
+
+-- more detailed
+SELECT 
+    SCHEMA_NAME AS `Database`,
+    DEFAULT_CHARACTER_SET_NAME AS `Charset`,
+    DEFAULT_COLLATION_NAME AS `Collation`
+FROM information_schema.SCHEMATA
+WHERE SCHEMA_NAME = 'your_database_name';
+
+-- for all the dbs
+SELECT 
+    SCHEMA_NAME AS `Database`,
+    DEFAULT_CHARACTER_SET_NAME AS `Charset`,
+    DEFAULT_COLLATION_NAME AS `Collation`
+FROM information_schema.SCHEMATA
+WHERE SCHEMA_NAME NOT IN ('mysql', 'information_schema', 'performance_schema', 'sys');
+```
+
 ### Use / select a database
 
 ```sql
